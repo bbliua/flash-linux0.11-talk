@@ -45,21 +45,21 @@ ROOT_DEV = 0x306
 entry start
 start:
 	mov	ax,#BOOTSEG
-	mov	ds,ax
-	mov	ax,#INITSEG
-	mov	es,ax
-	mov	cx,#256
+	mov	ds,ax		;;; ds: 0x07c0
+	mov	ax,#INITSEG 
+	mov	es,ax		;;; es: 0x9000
+	mov	cx,#256		;;; 256 -> repeat movw 256次
 	sub	si,si
 	sub	di,di
-	rep
+	rep				;;; rep -> repeat next act cx 次
 	movw
-	jmpi	go,INITSEG
-go:	mov	ax,cs
-	mov	ds,ax
+	jmpi	go,INITSEG  ;;; 跳到 0x90000:go 这个位置执行 -----> cs 寄存器表示 代码段寄存器   cpu当前执行代码在内存中的位置由cs:ip这组寄存器配合指向  cs是基址 ip是偏移地址 ;;; 此时 cs值为0x9000 ip 值为 go这个标签的偏移地址
+go:	mov	ax,cs			;;; 注: 是跳到0x90000不是0x9000，cs为0x9000
+	mov	ds,ax		;;; ds 置为0x9000
 	mov	es,ax
 ; put stack at 0x9ff00.
-	mov	ss,ax
-	mov	sp,#0xFF00		; arbitrary value >>512
+	mov	ss,ax		;;; ss为栈段寄存器，配合栈基址寄存器sp来表示栈顶地址; sp 赋值为0xff00
+	mov	sp,#0xFF00		; arbitrary value >>512   => 栈顶地址为ss:sp => 0x9ff00 => 这些步骤做的事儿: 代码段寄存器cs,数据段寄存器ds,栈段寄存器ss和栈基址寄存器sp分别设好值，方便后续使用.
 
 ; load the setup-sectors directly after the bootblock.
 ; Note that 'es' is already set up.
@@ -69,7 +69,7 @@ load_setup:
 	mov	cx,#0x0002		; sector 2, track 0
 	mov	bx,#0x0200		; address = 512, in INITSEG
 	mov	ax,#0x0200+SETUPLEN	; service 2, nr of sectors
-	int	0x13			; read it
+	int	0x13			; read it  ;;;发起0x13号中断[dx,cx,bx,ax为该中断指令的参数] ;;;该中断处理程序是BIOS提前写好的，读取磁盘相关功能的函数
 	jnc	ok_load_setup		; ok - continue
 	mov	dx,#0x0000
 	mov	ax,#0x0000		; reset the diskette

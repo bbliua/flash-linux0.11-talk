@@ -70,6 +70,9 @@ struct {
 	long * a;
 	short b;
 	} stack_start = { & user_stack [PAGE_SIZE>>2] , 0x10 };
+	// 高8位字节是0x10,将会赋值给ss栈段寄存器,低位16字节是user_stack这个数组最后一个元素的地址值，将赋值给esp寄存器
+	// 保护模式，段选择子，指向全局描述符表中第二个段描述符(数据段描述符)，段基址是0
+	// 赋值给 esp 寄存器的就是 user_stack 数组的最后一个元素的内存地址值，那最终的栈顶地址，也指向了这里（user_stack + 0），后面的压栈操作，就是往这个新的栈顶地址处压
 /*
  *  'math_state_restore()' saves the current math information in the
  * old math state array, and gets the new ones from the current task

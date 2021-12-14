@@ -13,16 +13,16 @@
  */
 .text
 .globl _idt,_gdt,_pg_dir,_tmp_floppy_area
-_pg_dir:
+_pg_dir:	;;;; 页目录
 startup_32:
 	movl $0x10,%eax
 	mov %ax,%ds
 	mov %ax,%es
 	mov %ax,%fs
 	mov %ax,%gs
-	lss _stack_start,%esp
-	call setup_idt
-	call setup_gdt
+	lss _stack_start,%esp    ;;;;; _stack_start 标号定义在 sched.c
+	call setup_idt			;;设置中断描述符表
+	call setup_gdt			;;设置全局描述符表
 	movl $0x10,%eax		; reload all the segment registers
 	mov %ax,%ds		; after changing gdt. CS was already
 	mov %ax,%es		; reloaded in 'setup_gdt'
@@ -74,6 +74,11 @@ check_x87:
  *  are enabled elsewhere, when we can be relatively
  *  sure everything is ok. This routine will be over-
  *  written by the page tables.
+ */
+ /*
+  *中断描述符表 idt 里面存储着一个个中断描述符，每一个中断号就对应着一个中断描述符，而中断描述符里面存储着主要是中断程序的地址，这样一个中断号过来后，CPU 就会自动寻找相应的中断程序，然后去执行它。
+  *那这段程序的作用就是，设置了 256 个中断描述符，并且让每一个中断描述符中的中断程序例程都指向一个 ignore_int 的函数地址，这个是个默认的中断处理程序，之后会逐渐被各个具体的中断程序所覆盖。比如之后键盘模块会将自己的键盘中断处理程序，覆盖过去。
+  *那现在，产生任何中断都会指向这个默认的函数 ignore_int，也就是说现在这个阶段你按键盘还不好使
  */
 setup_idt:
 	lea ignore_int,%edx
@@ -138,7 +143,7 @@ after_page_tables:
 	pushl $0
 	pushl $L6		# return address for main, if it decides to.
 	pushl $_main
-	jmp setup_paging
+	jmp setup_paging ;;开启分页机制，并跳转到main函数
 L6:
 	jmp L6			# main should never return here, but
 				# just in case, we know what happens.

@@ -37,15 +37,17 @@ start:
 	mov	ds,ax
 	mov	ah,#0x03	; read cursor pos
 	xor	bh,bh
-	int	0x10		; save it in known place, con_init fetches
+	int	0x10		; save it in known place, con_init fetches ;;; 触发BIOS提供的显示服务中断处理程序, ah寄存器被赋值为0x03表示显示服务里具体的'读取光标的位置功能', 看图19.webp
 	mov	[0],dx		; it from 0x90000.
 
+;;; 获取内存信息
 ; Get memory size (extended mem, kB)
 
 	mov	ah,#0x88
 	int	0x15
 	mov	[2],ax
 
+;;; 获取显卡显示模式
 ; Get video-card data:
 
 	mov	ah,#0x0f
@@ -53,6 +55,7 @@ start:
 	mov	[4],bx		; bh = display page
 	mov	[6],ax		; al = video mode, ah = window width
 
+;;; 检查显示方式并取参数
 ; check for EGA/VGA and some config parameters
 
 	mov	ah,#0x12
@@ -62,6 +65,7 @@ start:
 	mov	[10],bx
 	mov	[12],cx
 
+;;; 获取第一块硬盘信息
 ; Get hd0 data
 
 	mov	ax,#0x0000
@@ -106,7 +110,7 @@ is_disk1:
 
 ; now we want to move to protected mode ...
 
-	cli			; no interrupts allowed ;
+	cli			; no interrupts allowed ;			;;;;;;;;;    关闭中断 [后续需要把BIOS原有中断向量表覆盖掉，以注册自己的中断向量表, 这个时候不允许中断进来]
 
 ; first we move the system to it's rightful place
 
@@ -122,9 +126,15 @@ do_move:
 	sub	si,si
 	mov 	cx,#0x8000
 	rep
-	movsw
-	jmp	do_move
+	movsw		
+	jmp	do_move  ;;;;;;;; 内存复制，看图20.webp, 内存布局现状: 21.webp
 
+;;;;;  重量级工程: 模式转换  => 16位实模式 转变为 32位的保护模式
+;;; 实模式  cpu计算物理地址方式: 段基址左移4位，加上偏移地址如图 22.webp
+;;; 保护模式： ds 称为段选择子，存储着段描述符的索引: 23.webp  通过段描述符索引，可以从全局描述符表 gdt 中找到一个段描述符，段描述符里存储着段基址, 段描述符结构: 24.webp
+;;; 保护模式物理地址转换过程: 25.webp  总结: 段寄存器（比如 ds、ss、cs）里存储的是段选择子，段选择子去全局描述符表中寻找段描述符，从中取出段基址;  偏移地址 + 段基址 = 物理地址
+;;; 全局描述符表(gdt): 26.webp; 
+;; lgdt gdt_48  表示把gdt_48放在gdtr寄存器中
 ; then we load the segment descriptors
 
 end_move:
@@ -134,6 +144,7 @@ end_move:
 	lgdt	gdt_48		; load gdt with whatever appropriate
 
 ; that was painless, now we enable A20
+;;;; 打开A20地址线 .. 32位可用
 
 	call	empty_8042
 	mov	al,#0xD1		; command write
@@ -187,7 +198,7 @@ end_move:
 ; things as simple as possible, we do no register set-up or anything,
 ; we let the gnu-compiled 32-bit programs do that. We just jump to
 ; absolute address 0x00000, in 32-bit protected mode.
-
+;;;; 切换模式: 实模式->保护模式
 	mov	ax,#0x0001	; protected mode (PE) bit
 	lmsw	ax		; This is it;
 	jmpi	0,8		; jmp offset 0 of segment 8 (cs)
