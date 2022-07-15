@@ -33,7 +33,7 @@
 
 **架构图**
 
-![架构图](https://user-images.githubusercontent.com/25787738/141248934-7b48b96c-dbb6-4f9e-a438-6f6f414c8113.png)
+![架构图](https://user-images.githubusercontent.com/25787738/163914291-4aba48d7-f49e-4557-a4c4-d9ff07a20894.png)
 
 ---
 
@@ -78,14 +78,24 @@
    * [第25回 通过 fork 看一次系统调用流程](https://mp.weixin.qq.com/s/rYBSH_AZDwgc8knSKDSSxA)
    * [第26回 fork 中进程基本信息的复制](https://mp.weixin.qq.com/s/8cy-xX3ekeqHelrFcYFkvw)
    * [第27回 fork 中进程内存规划的问题](https://mp.weixin.qq.com/s/d2pHFSbTLb-nv2C_RfKlVA)
-   * [第三部分总结与回顾](http://mp.weixin.qq.com/s?__biz=Mzk0MjE3NDE0Ng==&mid=2247501947&idx=1&sn=cb94f53c75d674d30fb4903778c74c08&chksm=c2c5b2d6f5b23bc027d9652d3e9949e55fd3b101beb87f6f80dd77d8233c0b51bede73edad46&scene=21#wechat_redirect)
-   * [第28回 番外篇 - 我居然会认为权威书籍写错了...](http://mp.weixin.qq.com/s?__biz=Mzk0MjE3NDE0Ng==&mid=2247500507&idx=1&sn=a7863ac6144a1fce942a91a9d573ef1a&chksm=c2c5b876f5b23160502f3d1e7a7d00ad43231aa49eea9809e063f010d65846c512ec87e752a0&scene=21#wechat_redirect)
-   * [第29回 番外篇 - 让我们一起来写本书？](http://mp.weixin.qq.com/s?__biz=Mzk0MjE3NDE0Ng==&mid=2247501692&idx=1&sn=e68f273d16fbf4c1ccd30f7b4eb0943d&chksm=c2c5bdd1f5b234c7518f9ffa77b45491919bbcc9bf5a0db8056b0c7288c0515144009216aa01&scene=21#wechat_redirect)
-   * [第30回 番外篇 - 写时复制就这么几行代码](http://mp.weixin.qq.com/s?__biz=Mzk0MjE3NDE0Ng==&mid=2247502033&idx=1&sn=1acfd8b7f4c805906ecd51c33d0010eb&chksm=c2c5b27cf5b23b6a41051c7f93407afc97094a4b0a36ea050616778f4d072f074602f98983b2&scene=21#wechat_redirect)
+   * [第三部分总结与回顾](https://mp.weixin.qq.com/s/V_Ryxox3iDCO994FzkSFfA)
+   * [第28回 番外篇 - 我居然会认为权威书籍写错了...](https://mp.weixin.qq.com/s/JzCy_4RPhy17_G6KbY3f2g)
+   * [第29回 番外篇 - 让我们一起来写本书？](https://mp.weixin.qq.com/s/NFUgJ4-hIyrs1sQr8AUCvA)
+   * [第30回 番外篇 - 写时复制就这么几行代码](https://mp.weixin.qq.com/s/Pdnmys_hGoToZN193rfnoQ)
 
 * **第四部分：shell 程序的到来**
 
-   * [第31回 拿到硬盘信息](https://mp.weixin.qq.com/s?__biz=Mzk0MjE3NDE0Ng==&mid=2247502161&idx=1&sn=219186a1e587f40308515852d293aaf4&chksm=c2c5b3fcf5b23aead170092d4042abd54b272694cbaac3f750eb3adea584ee29653c72ad2915&token=1536500380&lang=zh_CN#rd)
+   * [第31回 | 拿到硬盘信息](http://mp.weixin.qq.com/s?__biz=Mzk0MjE3NDE0Ng==&mid=2247502161&idx=1&sn=219186a1e587f40308515852d293aaf4&chksm=c2c5b3fcf5b23aead170092d4042abd54b272694cbaac3f750eb3adea584ee29653c72ad2915&scene=21#wechat_redirect)
+   * [第32回 | 加载根文件系统](http://mp.weixin.qq.com/s?__biz=Mzk0MjE3NDE0Ng==&mid=2247502181&idx=1&sn=b6dcbd1d2cf930002852008a1c4e6a65&chksm=c2c5b3c8f5b23ade1532b725995dbc3b0138202555e44a6e308b84d668a2ef3041eb5cf77f86&scene=21#wechat_redirect)
+   * [第33回 | 打开终端设备文件](http://mp.weixin.qq.com/s?__biz=Mzk0MjE3NDE0Ng==&mid=2247502230&idx=1&sn=44e023bf0b9b37261e35a6e3722bc57f&chksm=c2c5b33bf5b23a2d10a9dd36606c497f41a1c3dced57845ce7ef12741a348fab82beba462a8a&scene=21#wechat_redirect)
+   * [第34回 | 进程2的创建](http://mp.weixin.qq.com/s?__biz=Mzk0MjE3NDE0Ng==&mid=2247502269&idx=1&sn=19f6831de5bac0d8a588b80757dbb1f4&chksm=c2c5b310f5b23a0633df6a75e36f4dae515e9d9aee1fa046888573e3d60e62752612edae536a&scene=21#wechat_redirect)
+   * [第35回 | execve 加载并执行 shell 程序](http://mp.weixin.qq.com/s?__biz=Mzk0MjE3NDE0Ng==&mid=2247502475&idx=1&sn=4fcdbaa03bf6a1ca04db4013309c6aa3&chksm=c2c5b026f5b2393049efca68c429df5038fa0f317eea79fbd9ec2c661c3ec12b47a0701376a7&scene=21#wechat_redirect)
+   * [第36回 | 缺页中断](http://mp.weixin.qq.com/s?__biz=Mzk0MjE3NDE0Ng==&mid=2247502511&idx=1&sn=eacddbb11dd2402c561a611f708ee045&chksm=c2c5b002f5b23914ccd645d94bdc59e0322776f71f41e6744fddeca2bfa027d12a25ec6bfc8a&scene=21#wechat_redirect)
+   * [第37回 | shell 程序跑起来了](http://mp.weixin.qq.com/s?__biz=Mzk0MjE3NDE0Ng==&mid=2247502581&idx=1&sn=df3f2c19ce511ac24145091892f47837&chksm=c2c5b058f5b2394ee095d679071b43c23853dc86d5cfd4cc961568643110ab734f635b899984&scene=21#wechat_redirect)
+   * [第38回 | 操作系统启动完毕](http://mp.weixin.qq.com/s?__biz=Mzk0MjE3NDE0Ng==&mid=2247502613&idx=1&sn=d7e85595323d3de138e5ac52bf8e61dd&chksm=c2c5b1b8f5b238ae8785f45bf83434839689e7e5a697026d9ebde5738f11a83c4379a16c349f&scene=21#wechat_redirect)
+   * [第39回 | 番外篇 - Linux 0.11 内核调试](http://mp.weixin.qq.com/s?__biz=Mzk0MjE3NDE0Ng==&mid=2247502498&idx=1&sn=01cf816694f74ca8437374a9aa23ab64&chksm=c2c5b00ff5b23919c43ac96a38bc8b09f42ea17f92ea933157db3e7f0c77bb876bf7d0524afa&scene=21#wechat_redirect)
+   * [第40回 | 番外篇 - 为什么你怎么看也看不懂](http://mp.weixin.qq.com/s?__biz=Mzk0MjE3NDE0Ng==&mid=2247502517&idx=1&sn=d6a20fb6ad50da584ac32e60823a1834&chksm=c2c5b018f5b2390e690c465aa35d822d14a23a2b76587303e9374aca431a718e1b104569efe4&scene=21#wechat_redirect)
+   * [第四部分总结与回顾](https://mp.weixin.qq.com/s?__biz=Mzk0MjE3NDE0Ng==&mid=2247502650&idx=1&sn=ad947d70d372a1bc46741c459fd0ef9a&chksm=c2c5b197f5b23881a5e61c5581300beb4b3f1db8cab79eabec22fd847f1cdc0e11d3a713fd9f&token=1320754592&lang=zh_CN#rd)
 
 * **第五部分：从一个命令的执行看操作系统各模块的运作**
 
